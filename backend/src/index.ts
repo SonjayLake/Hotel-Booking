@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
+import userRouter from "./routes/users"
 
 mongoose.connect(process.env.MONGO_CONNECTION as string);
 
@@ -12,11 +13,8 @@ app.use(express.urlencoded({extended: true})); //helps for parsing url
 app.use(cors()); //allows frontend and backend to communicate with each other
 
 
-app.get("/api/test", async (req,res) => {
-    res.send({
-        message: "Connection successful",
-    });
-});
+
+app.use("/api/users", userRouter);
 
 app.listen(8000, () => {
     console.log(`server is running on port ${process.env.PORT}`)
