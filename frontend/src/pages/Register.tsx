@@ -1,7 +1,10 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
+import {useMutation} from "react-query";
+import * as apiClient from "../api-clients";
 
-type RegisterFormData = {
+
+export type RegisterFormData = {
     firstName: string,
     lastName: string,
     email: string,
@@ -13,8 +16,17 @@ function Register() {
 
     const {register, watch, handleSubmit, formState: {errors}} = useForm<RegisterFormData>();
 
+    const mutation = useMutation(apiClient.register,{
+        onSuccess: () => {
+            console.log("Registration successful!") // for testing purposes
+        },
+        onError: (err: Error) => {
+            console.log("There was an issue registering: ",err);
+        } 
+    });
+
     const onSubmit = handleSubmit((data) => {
-        console.log(data);
+        mutation.mutate(data);
     });
     
   return (
@@ -57,14 +69,14 @@ function Register() {
                             value: 6, message: "Password must be at least 6 characters."
                         }
                     })
-                }/>
+                } autoComplete='on'/>
                 {errors.password && (
                         <span className="text-red-500">{errors.password.message}</span>
                     ) }
                 </label>
                 <label className="text-gray-700  text-sm text-bold flex-1">
                 Confirm Password
-                <input type="password" className="border rounded w-full py-1 px-2 font-normal flex-1" {...register(
+                <input type="password" autoComplete='on' className="border rounded w-full py-1 px-2 font-normal flex-1" {...register(
                     "confirmPassword", 
                     {
                         validate:(value) => {
