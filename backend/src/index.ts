@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/users";
 import authRouter from "./routes/auth";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 mongoose.connect(process.env.MONGO_CONNECTION as string);
 
@@ -18,7 +19,7 @@ app.use(
     credentials: true,
   })
 ); //allows frontend and backend to communicate with each other
-
+app.use(express.static(path.join(__dirname,"../../frontend/dist")));
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 
