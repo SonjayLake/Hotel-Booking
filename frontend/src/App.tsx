@@ -1,6 +1,5 @@
 import {
   Navigate,
-  Router,
   Routes,
   Route,
   BrowserRouter,

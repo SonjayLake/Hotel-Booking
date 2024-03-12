@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-clients";
@@ -27,7 +26,7 @@ function SignIn() {
       navigate("/"); //send to the homepage
     },
     onError: (error: Error) => {
-      showToast({ message: "Unauthorized", type: "ERROR" });
+      showToast({ message: `Unauthorized ${error.message}`, type: "ERROR" });
     },
   });
 
