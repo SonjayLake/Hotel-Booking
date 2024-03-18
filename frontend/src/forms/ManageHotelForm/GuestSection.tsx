@@ -19,7 +19,7 @@ function GuestSection() {
             {...register("adultCount", { required: "This field is required" })}
           />
           {errors.adultCount && (
-            <span className="text-red-500">errors.adultCount.message</span>
+            <span className="text-red-500">{errors.adultCount.message}</span>
           )}
         </label>
 
@@ -32,7 +32,7 @@ function GuestSection() {
             {...register("childCount", { required: "This field is required" })}
           />
           {errors.childCount && (
-            <span className="text-red-500">errors.childCount.message</span>
+            <span className="text-red-500">{errors.childCount.message}</span>
           )}
         </label>
       </div>
