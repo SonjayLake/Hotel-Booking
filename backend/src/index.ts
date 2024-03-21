@@ -1,4 +1,5 @@
 import express from "express";
+import { Request,Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -29,9 +30,16 @@ app.use(
   })
 ); //allows frontend and backend to communicate with each other
 app.use(express.static(path.join(__dirname,"../../frontend/dist")));
+
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/my-hotels", myHotelRoutes);
+
+
+//catch all route
+app.get("*",(req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname,"../../frontend/dist/index.html"))
+})
 
 app.listen(8000, () => {
   console.log(`server is running on port ${process.env.PORT}`);
