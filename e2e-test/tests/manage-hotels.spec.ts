@@ -49,3 +49,21 @@ test("should allow user to add a hotel", async ({ page }) => {
 
   await expect(page.getByText("Hotel Saved!")).toBeVisible({ timeout: 10000 });
 });
+
+test("should display hotels", async ({page}) => {
+  await page.goto(`${URL}/my-hotels`);
+
+  await expect(page.getByText("Dublin Getaways").first()).toBeVisible();
+
+  await expect(page.getByText("Ut feugiat nibh vel sodales suscipit").first()).toBeVisible();
+  
+  await expect(page.getByText("Dublin, Ireland").first()).toBeVisible();
+  await expect(page.getByText("$119 per night").first()).toBeVisible();
+  await expect(page.getByText("2 adults, 3 children").first()).toBeVisible();
+  await expect(page.getByText("All Inclusive").first()).toBeVisible();
+  await expect(page.getByText("2 stars").first()).toBeVisible();
+
+  await expect(page.getByRole("link",{name: "View Details"}).first()).toBeVisible();
+  await expect(page.getByRole("link",{name: "Add Hotel"}).first()).toBeVisible();
+
+})
