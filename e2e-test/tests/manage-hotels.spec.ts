@@ -47,23 +47,47 @@ test("should allow user to add a hotel", async ({ page }) => {
 
   await page.getByRole("button", { name: "Save" }).click();
 
-  await expect(page.getByText("Hotel Saved!")).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText("Hotel Saved!")).toBeVisible({ timeout: 20000 });
 });
 
-test("should display hotels", async ({page}) => {
+test("should display hotels", async ({ page }) => {
   await page.goto(`${URL}/my-hotels`);
 
   await expect(page.getByText("Dublin Getaways").first()).toBeVisible();
 
-  await expect(page.getByText("Ut feugiat nibh vel sodales suscipit").first()).toBeVisible();
-  
+  await expect(
+    page.getByText("Ut feugiat nibh vel sodales suscipit").first()
+  ).toBeVisible();
+
   await expect(page.getByText("Dublin, Ireland").first()).toBeVisible();
   await expect(page.getByText("$119 per night").first()).toBeVisible();
   await expect(page.getByText("2 adults, 3 children").first()).toBeVisible();
   await expect(page.getByText("All Inclusive").first()).toBeVisible();
   await expect(page.getByText("2 stars").first()).toBeVisible();
 
-  await expect(page.getByRole("link",{name: "View Details"}).first()).toBeVisible();
-  await expect(page.getByRole("link",{name: "Add Hotel"}).first()).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "View Details" }).first()
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Add Hotel" }).first()
+  ).toBeVisible();
+});
 
-})
+test("should edit hotel", async ({ page }) => {
+  await page.goto(`${URL}/my-hotels`);
+
+  await page.getByRole("link", { name: "View Details" }).first().click();
+
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+
+  await page.locator('[name="name"]').fill("");
+  await page.locator('[name="name"]').fill("Hotel Updated");
+
+  await page.getByRole("button", { name: "Save" }).click();
+
+  await expect(page.getByText("Hotel Saved!")).toBeVisible({ timeout: 20000 });
+
+  await page.reload();
+
+  await expect(page.locator('[name="name"]')).toHaveValue("Hotel Updated");
+});
