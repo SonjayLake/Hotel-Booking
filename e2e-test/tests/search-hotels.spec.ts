@@ -28,5 +28,5 @@ test("Should show search results", async ({page}) => {
     await page.getByRole("button",{name: "Search"}).click()
 
     await expect(page.getByText("Hotels found in Dublin")).toBeVisible();
-    await expect(page.getByText("Dublin Hotel   ")).toBeVisible();
+    await expect(page.getByText("Dublin Hotel")).toBeVisible();
 })
