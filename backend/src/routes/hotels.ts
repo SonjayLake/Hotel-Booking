@@ -35,12 +35,12 @@ router.get("/search", async (req: Request, res: Response) => {
 
     const skip = (pageNumber - 1) * pageSize;
 
-    const hotels = await Hotel.find()
+    const hotels = await Hotel.find(query)
       .skip(skip)
       .sort(sortOptions)
       .limit(pageSize); // all hotels
 
-    const total = await Hotel.countDocuments();
+    const total = await Hotel.countDocuments(query);
 
     const response: HotelSearchResponse = {
       data: hotels,
