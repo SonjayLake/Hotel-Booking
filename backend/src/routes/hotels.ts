@@ -87,9 +87,6 @@ router.post(
   "/:hotelId/bookings/payment-intent",
   verifyToken,
   async (req: Request, res: Response) => {
-    // total cost of booking
-    //hotelId
-    //userId
     const { numberOfNights } = req.body;
     const hotelId = req.params.hotelId;
     const hotel = await Hotel.findById(hotelId);

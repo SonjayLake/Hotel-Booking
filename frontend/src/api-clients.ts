@@ -202,7 +202,7 @@ export const createPaymentIntent = async (
   if (!response.ok) {
     throw new Error("Error fetching payment intent");
   }
-
+  console.log("response in apiclient", response);
   return response.json();
 };
 

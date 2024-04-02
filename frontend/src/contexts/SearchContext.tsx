@@ -25,16 +25,17 @@ const SearchContext = React.createContext<SearchContext | undefined>(undefined);
 export const SearchContextProvider = ({
   children,
 }: SearchContextProviderProps) => {
+  const now = new Date();
+  const tomorrow = now;
+  tomorrow.setDate(now.getDate() + 1);
   const [destination, setDestination] = useState<string>(
     () => sessionStorage.getItem("destination") || ""
   );
   const [checkIn, setCheckIn] = useState<Date>(
-    () =>
-      new Date(sessionStorage.getItem("checkIn") || new Date().toISOString())
+    () => new Date(sessionStorage.getItem("checkIn") || now.toISOString())
   );
   const [checkOut, setCheckOut] = useState<Date>(
-    () =>
-      new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
+    () => new Date(sessionStorage.getItem("checkOut") || tomorrow.toISOString())
   );
   const [adultCount, setAdultCount] = useState<number>(() =>
     parseInt(sessionStorage.getItem("adultCount") || "1")

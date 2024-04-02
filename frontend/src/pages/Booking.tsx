@@ -14,7 +14,6 @@ function Booking() {
   const { stripePromise } = useAppContext();
 
   const [numberOfNights, setNumberOfNights] = useState<number>(0);
-
   useEffect(() => {
     if (search.checkIn && search.checkOut) {
       const nights = Math.abs(
@@ -48,8 +47,7 @@ function Booking() {
     "fetchCurrentUser",
     apiClient.fetchCurrentUser
   );
-  // console.log("paymentIntentData:", paymentIntentData);
-  // console.log("currentUser: ", currentUser);
+
   return (
     <div className="grid md:grid-cols-[1fr_2fr]">
       {hotel && (

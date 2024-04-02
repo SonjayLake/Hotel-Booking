@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 function SearchBar() {
   const search = useSearchContext();
   const navigate = useNavigate();
-
   const [destination, setDestination] = useState<string>(search.destination);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
@@ -38,6 +37,8 @@ function SearchBar() {
   };
 
   const minDate = new Date();
+  const minEndDate = minDate;
+  minEndDate.setDate(minDate.getDate() + 1);
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
   return (
@@ -105,7 +106,7 @@ function SearchBar() {
           selectsStart
           startDate={checkIn}
           endDate={checkOut}
-          minDate={new Date(checkIn.getDate() + 1)}
+          minDate={minEndDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
           className="min-w-full bg-white p-2 focus:outline-none"
@@ -115,7 +116,7 @@ function SearchBar() {
 
       <div className="flex gap-1">
         <button
-          disabled={checkOut < checkIn}
+          disabled={checkOut <= checkIn}
           className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 disabled:bg-gray-500"
         >
           Search
