@@ -28,10 +28,13 @@ function SearchBar() {
   };
 
   const handleClear = (event: FormEvent) => {
+    let now = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
     event.preventDefault();
     setDestination("");
-    setCheckIn(new Date());
-    setCheckOut(new Date());
+    setCheckIn(now);
+    setCheckOut(tomorrow);
     setAdultCount(1);
     setChildCount(0);
   };

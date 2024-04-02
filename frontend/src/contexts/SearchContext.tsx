@@ -26,8 +26,9 @@ export const SearchContextProvider = ({
   children,
 }: SearchContextProviderProps) => {
   const now = new Date();
-  const tomorrow = now;
-  tomorrow.setDate(now.getDate() + 1);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   const [destination, setDestination] = useState<string>(
     () => sessionStorage.getItem("destination") || ""
   );
