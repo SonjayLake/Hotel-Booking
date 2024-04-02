@@ -105,7 +105,7 @@ function SearchBar() {
           selectsStart
           startDate={checkIn}
           endDate={checkOut}
-          minDate={minDate}
+          minDate={new Date(checkIn.getDate() + 1)}
           maxDate={maxDate}
           placeholderText="Check-out Date"
           className="min-w-full bg-white p-2 focus:outline-none"
@@ -114,7 +114,10 @@ function SearchBar() {
       </div>
 
       <div className="flex gap-1">
-        <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
+        <button
+          disabled={checkOut < checkIn}
+          className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 disabled:bg-gray-500"
+        >
           Search
         </button>
         <button

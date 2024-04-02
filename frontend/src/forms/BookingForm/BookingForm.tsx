@@ -132,7 +132,6 @@ function BookingForm({ currentUser, paymentIntent }: Props) {
       <div className="space-y-2">
         <h3 className="text-xl font-semibold">Payment Details</h3>
       </div>
-
       <CardElement
         id="payment-element"
         className="border rounded-md p-2 text-sm"

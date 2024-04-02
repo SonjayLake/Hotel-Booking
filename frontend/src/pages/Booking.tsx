@@ -48,7 +48,8 @@ function Booking() {
     "fetchCurrentUser",
     apiClient.fetchCurrentUser
   );
-
+  // console.log("paymentIntentData:", paymentIntentData);
+  // console.log("currentUser: ", currentUser);
   return (
     <div className="grid md:grid-cols-[1fr_2fr]">
       {hotel && (

@@ -34,6 +34,7 @@ test("Should show search results", async ({ page }) => {
 test("Should show hotel detial", async ({ page }) => {
   await page.goto(URL);
 
+  //search for hotel and click on it
   await page.getByPlaceholder("Where are you going?").fill("Dublin");
   await page.getByRole("button", { name: "Search" }).click();
 
@@ -41,4 +42,39 @@ test("Should show hotel detial", async ({ page }) => {
 
   await expect(page).toHaveURL(/detail/);
   await expect(page.getByRole("button", { name: "Book Now" })).toBeVisible();
+});
+
+test("should book hotel", async ({ page }) => {
+  await page.goto(URL);
+
+  //search for hotel and click on it
+  await page.getByPlaceholder("Where are you going?").fill("Dublin");
+
+  const date = new Date();
+
+  date.setDate(date.getDate() + 4);
+
+  const formattedDate = date.toISOString().split("T")[0];
+
+  await page.getByPlaceholder("Check-out Date").fill(formattedDate);
+
+  await page.getByRole("button", { name: "Search" }).click();
+
+  await page.getByText("Hotel Updated").click();
+
+  await page.getByRole("button", { name: "Book Now" }).click();
+
+  await expect(page.getByText("Total Cost: $357.00")).toBeVisible();
+
+  const stripeFrame = page.frameLocator("iframe").first();
+  await stripeFrame
+    .locator('[placeholder="Card number"]')
+    .fill("4242424242424242");
+  await stripeFrame.locator('[placeholder="MM / YY"]').fill("12/50");
+  await stripeFrame.locator('[placeholder="CVC"]').fill("333");
+  await stripeFrame.locator('[placeholder="ZIP"]').fill("10453");
+
+  await page.getByRole("button", { name: "Confirm Booking" }).click();
+
+  await expect(page.getByText("Booking Saved!")).toBeVisible();
 });
