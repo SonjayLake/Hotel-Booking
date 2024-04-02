@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/users";
 import authRouter from "./routes/auth";
 import cookieParser from "cookie-parser";
+import bookingRoutes from "./routes/my-bookings";
 import path from "path";
 import myHotelRoutes from "./routes/my-hotels";
 import hotelRoutes from "./routes/hotels";
@@ -35,6 +36,7 @@ app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
+app.use("/api/my-bookings", bookingRoutes);
 
 //catch all route
 app.get("*", (req: Request, res: Response) => {
