@@ -77,4 +77,8 @@ test("should book hotel", async ({ page }) => {
   await page.getByRole("button", { name: "Confirm Booking" }).click();
 
   await expect(page.getByText("Booking Saved!")).toBeVisible();
+
+  //check to see if hotel was added to my bookings page
+  await page.getByRole("link", { name: "My Bookings" }).click();
+  await expect(page.getByText("Hotel Updated")).toBeVisible();
 });
