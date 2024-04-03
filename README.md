@@ -1,5 +1,5 @@
 ## Overview
-The hotel booking app is a fullstack application which uses React and Node. It also uses key technologies in Stripe, JWT Auth, and React Query (Tan Stack).
+The hotel booking app is a fullstack application which uses React, Express, and TypeScript. It also uses key technologies in Stripe, JWT Auth, and React Query (Tan Stack).
 
 ### Preview
 
@@ -8,7 +8,8 @@ The hotel booking app is a fullstack application which uses React and Node. It a
 ### Built with
 
 - ReactJS
-- NodeJS
+- Express
+- TypeScript
 - Stripe API
 - JWT Authentication
 - Tailwind CSS
